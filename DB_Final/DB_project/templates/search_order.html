@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+訂單查詢
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/search_order.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="all_movie" class="tm-content tm-content-small-top">
+    <div class="tm-gallery-container">
+        <h2 class="tm-text-primary tm-text-center tm-gallery-header">
+            <h3 style="font-size: 70px;">訂票資訊</h3>
+        </h2>
+        <div style="text-align: left; margin-bottom: 20px;">
+            <button onclick="goToHome()" class="tm-btn">回到首頁</button>
+        </div>
+
+        
+        <!-- 訂單列表 -->
+        {% for order in orders %}
+<div class="tm-section">
+    <div class="tm-gallery-container" style="display: flex; gap: 50px;">
+        <!-- 左側客戶資料 -->
+        <div class="try1" style="flex: 1; padding: 20px;">
+            <div class="tm-section-right" >
+            <h3 class="section-title">客戶資訊</h3>
+            <form id="customer-info">
+                <div class="form-group">
+                    <label for="customer-name">姓名：</label>
+                    <input type="text" id="customer-name" value="{{ order.customer_name }}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="customer-phone">電話：</label>
+                    <input type="text" id="customer-phone" value="{{ order.customer_phone }}" readonly>
+                </div>
+            </form>
+        </div>
+        </div>
+        <!-- 右側電影資訊 -->
+        <div class="try2" style="flex: 1; padding: 20px;">
+            <div class="tm-section-right">
+            <h3 class="section-title">電影資訊</h3>
+            <form id="contact-form">
+                <div class="form-group">
+                    <label for="movies">電影：</label>
+                    <input type="text" id="movies" value="{{ order.movie_title }}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="branch">分店：</label>
+                    <input type="text" id="branch" value="{{ order.branch }}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="showtime">場次：</label>
+                    <input type="text" id="showtime" value="{{ order.showtime }}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="seat">座位：</label>
+                    <input type="text" id="seat" value="{{ order.selected_seats.0.row }}{{ order.selected_seats.0.col }}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="verify-code">驗證碼：</label>
+                    <input type="text" id="verify-code" value="{{ order.verify_code }}" readonly>
+                </div>
+            </form>
+          </div>
+        </div>
+    </div>
+</div>
+<div style="text-align: center; margin-top: 20px;">
+    <button class="cancel-button" onclick="cancelOrder('{{ order.customer_phone }}', '{{ order.verify_code }}')">取消訂單</button>
+</div>
+{% empty %}
+<p style="text-align: center; font-size: 20px; color: red; margin-top: 30px;">查無訂單資料。</p>
+{% endfor %}
+
+    </div>
+</div>
+
+
+
+
+
+        <!-- 訂單列表 end-->
+
+        {% endblock %}
+
+        {% block js %}
+        <script src="{% static 'js/search_order.js' %}"></script>
+        <!-- 這裡可以添加相關的 JS 代碼 -->
+        <script>
+            function goToHome() {
+                window.location.href = '/'; // 導航到首頁
+            }
+        </script>
+        {% endblock %}

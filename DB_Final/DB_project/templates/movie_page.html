@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+所有電影與搜尋
+{% endblock %}
+
+{% block css %}
+<!-- 可以加入額外的 CSS -->
+{% endblock %}
+
+{% block content %}
+<div id="movies-page" class="tm-content tm-content-small-top">
+    <div class="tm-gallery-container">
+        
+
+        <h2 class="tm-text-primary tm-text-center tm-gallery-header">
+            <h3 style="font-size: 70px;">所有電影</h3>
+        </h2>
+        <!-- 回到首頁按鈕 -->
+        <div style="text-align: left; margin-bottom: 20px;">
+            <button onclick="redirectToHome()" class="tm-btn">回到首頁</button>
+        </div>
+        <!-- 搜尋欄 -->
+        <form action="{% url 'movie_page' %}" method="get">
+            <input
+                type="text"
+                name="query"
+                placeholder="搜尋電影..."
+                value="{{ query }}"
+                class="movie-search-bar"
+                style="width: 400px;"
+            >
+            <button type="submit" class="tm-btn" style="width: 400px;">搜尋</button>
+        </form>
+
+        <br>
+
+        <!-- 電影列表 -->
+        <div class="tm-section-col">
+            {% for movie in movies %}
+            <div class="tm-media">
+                <div class="tm-media-body">
+                    <h2><a href="#" class="tm-text-primary">{{ movie.title_ch }}</a></h2>
+                    <p class="tm-mb-20 tm-text-small">
+                        時長：{{ movie.duration }} 分鐘
+                    </p>
+                    <p class="tm-mb-20 tm-text-small">
+                        類型：{{ movie.type }}
+                    </p>
+                    <p class="tm-mb-20 tm-text-small">
+                        分級：{{ movie.rating }}
+                    </p>
+                    <p class="tm-mb-20 tm-text-small">
+                        簡介：{{ movie.info }}
+                    </p>
+                    <span class="tm-text-secondary tm-media-span tm-text-small">
+                        狀態： {{ movie.status }}
+                    </span>
+                    <hr class="tm-hr tm-mr">
+                </div>
+            </div>
+            {% empty %}
+            <p style="text-align: center; color: red;">查無結果。</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<!-- 如果需要新增 JavaScript -->
+<script>
+    function redirectToHome() {
+        window.location.href = '/'; // 導航到首頁
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+所有電影
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+        {% block content %}  
+        <div id="all_movie" class="tm-content tm-content-small-top">
+            <div class="tm-gallery-container" id="all_movie">
+
+                <h2 class="tm-text-primary tm-text-center tm-gallery-header">
+                <h3 style="font-size: 70px;">所有電影</h3>        
+                {% for movie in all_movies %}
+                    <div class="tm-media">
+                        <div class="tm-media-body">
+                            <h2><a href="#" class="tm-text-primary">{{ movie.title_ch }}</a></h2>
+                            <p class="tm-mb-20 tm-text-small">
+                                時長：{{ movie.duration }} 分鐘
+                            </p>
+                            <p class="tm-mb-20 tm-text-small">
+                                類型：{{ movie.type }}
+                            </p>
+                            <p class="tm-mb-20 tm-text-small">
+                                分級：{{ movie.rating }}
+                            </p>
+                            <p class="tm-mb-20 tm-text-small">
+                                簡介：{{ movie.info }}
+                            </p>
+                            <span class="tm-text-secondary tm-media-span tm-text-small">
+                                狀態： {{ movie.status }}
+                            </span>
+                            <hr class="tm-hr tm-mr">
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    
+        <!-- 所有電影 end-->
+
+        {% endblock %}
+
+        {% block js %}
+
+    {% endblock %}

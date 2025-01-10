@@ -1,0 +1,73 @@
+.tm-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px; /* 左右分區間隔 */
+    padding: 20px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background-color: #333;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.tm-section-left,
+.tm-section-right {
+    background-color: #222;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+#try1,
+#try2{
+    background-color: #222;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+.tm-section-left .section-title,
+.tm-section-right .section-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #99CC99;
+    margin-bottom: 20px; /* 與表單的間距 */
+}
+
+.tm-section-left input[type="text"],
+.tm-section-right input[type="text"] {
+    width: 100%; /* 輸入框寬度 */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #222;
+    color: #fff;
+}
+
+.tm-section-left input[type="text"]:focus,
+.tm-section-right input[type="text"]:focus {
+    outline: none;
+    border-color: #99CC99;
+}
+
+.tm-section-left .form-group,
+.tm-section-right .form-group {
+    margin-bottom: 15px; /* 輸入框間距 */
+}
+
+.cancel-button {
+    background-color: #ff4c4c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cancel-button:hover {
+    background-color: #ff1a1a;
+}

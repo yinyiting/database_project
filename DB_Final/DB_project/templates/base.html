@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}網站標題{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/tooplate-vertex.css' %}">
+    <link rel="stylesheet" href="{% static 'css/add.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index_css.css' %}">
+    {% block css %}
+
+    {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'js\jquery.singlePageNav.min.js' %}"></script>
+
+
+
+
+
+
+</head>
+
+<body>
+    <!-- Content -->
+    <main>
+        {% block content %}
+        <!-- 頁面內容 -->
+        {% endblock %}
+
+    </main>
+    {% block js %}
+    <!-- 頁面內容 -->
+    {% endblock %}
+    
+    <script src="{% static 'js/template.js' %}"></script>
+    <script>
+        $(window).on("load", function () {
+            $('body').addClass('loaded');
+        });
+
+    </script>
+</body>
+    
+</html>

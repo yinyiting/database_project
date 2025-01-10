@@ -1,0 +1,279 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+電影訂票系統
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+        {% block content %}
+        <!-- nav start-->
+        <nav class="tm-nav">
+            <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul id="tm-main-nav">
+                <li class="nav-item">
+                    <a href="javascript:void(0);" onclick="redirectToHome()" class="nav-link current">
+                        電影訂票系統
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#popular" class="nav-link">
+                        上映中電影
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#all_movie" class="nav-link">
+                        所有電影
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#order" class="nav-link">
+                        快速訂票
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#search" class="nav-link">
+                        查詢訂票
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- nav end -->
+
+        <!-- 上映中電影 -->
+        <div id="popular" class="tm-content tm-content-small-top">
+            <div class="tm-gallery-container">
+                <h2 class="tm-text-primary tm-text-center tm-gallery-header">
+                    <h3 style="font-size: 70px;">上映中電影</h3>
+                </h2>
+                <div class="tm-gallery tm-mb-80">
+                    {% for movie in now_showing_random %}
+                    <figure class="effect-goliath tm-gallery-item">
+                        <img src="{{ movie.img }}" alt="Image"/>
+                        <figcaption>
+                            <h2>{{ movie.title_ch }}</h2>
+                            <p>{{ movie.title_en }}</p>
+                            <a href="#order" onclick="selectMovie('{{ movie.movie_id }}', '{{ movie.img }}')">快速訂票</a>
+
+                        </figcaption>
+                    </figure>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- 所有電影 start-->
+        <div id="all_movie" class="tm-content tm-content-small-top">
+            <div class="tm-gallery-container" id="all_movie">
+
+                <h2 class="tm-text-primary tm-text-center tm-gallery-header">
+                <h3 style="font-size: 70px;">所有電影</h3>
+                <!-- 搜尋電影 -->
+
+                <form action="{% url 'movie_page' %}" method="get">
+                    <input
+                        type="text"
+                        name="query"
+                        placeholder="搜尋電影..."
+                        class="movie-search-bar"
+                        id="movieSearch"
+                        style="width: 400px;"
+                    >
+                    <button type="submit" class="glow-on-hover" style="width: 400px;">搜尋</button>
+                    <br><br>
+                </form>
+
+                <!-- 電影列表 -->
+                <div class="tm-section-col ">
+                    <!-- 所有電影1 -->
+                    {% for movie in random_movies %}
+                    <div class="tm-media">
+                        <div class="tm-media-body">
+                            <h2><a href="#" class="tm-text-primary">{{ movie.title_ch }}</a></h2>
+                            <p class="tm-mb-20 tm-text-small">
+                                {{ movie.info }}
+                            </p>
+                            <span class="tm-text-secondary tm-media-span tm-text-small">
+                                狀態： {{ movie.status }}
+                            </span>
+                            <hr class="tm-hr tm-mr">
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                <!-- More 按鈕 -->
+                <div class="tm-text-right">
+                    <a href="/movies/"  class="tm-btn tm-btn-next">More</a>
+                </div>
+            </div>
+        </div>
+        <!-- 所有電影 end-->
+
+        <!-- 快速訂票 start-->
+        <div id="order" class="tm-content tm-content-small-top">
+            <div class="tm-gallery-container" id="all_movie">
+                <h2 class="tm-text-primary tm-text-center tm-gallery-header">
+                <h3 style="font-size: 70px;">快速訂票</h3>
+
+        
+                    <!-- 快速訂票 第一頁 -->
+                    <div id="contact1" class="tm-section" >
+                        <div class="tm-gallery-container" >
+                            <div class="tm-section-col" style="padding: 0%;">
+                                <!-- 電影圖片 -->
+                                <div class="tm-section-left">
+                                    <img id="movie-image" class="tm-section-left img" src="{{ now_showing_movies.0.img }}" alt="Movie Image">
+                                </div>
+                                <!-- 電影圖片 end -->
+                                <div class="tm-section-right">
+                                    <form id="contact-form" class="tm-mb-200" style="max-width: 800px; margin-left: auto; margin-right: auto;">
+                                        <div class="form-group"><br>
+                                            <!-- 電影選單 -->
+                                            <label for="movies">選擇電影：</label>
+                                            <select id="movies" name="movies" onchange="updateImage();">
+                                                {% for movie in now_showing_movies %}
+                                                <option value="{{ movie.img }}" id="{{ movie.movie_id }}">
+                                                    {{ movie.title_ch }}
+                                                </option>
+                                                {% endfor %}
+                                            </select>
+                                            
+                                            
+                                            <!-- 電影選單 end -->
+                                        </div>
+                                        <div class="form-group">
+                                            <!-- 分店選單 -->
+                                            <label for="branch">選擇分店：</label>
+                                            <select id="branch" name="branch">
+                                                <option value="">請選擇電影</option>
+                                            </select>
+                                            
+                                            <!-- 分店選單 end -->
+                                        </div>
+                                        <div class="form-group">
+                                            <!-- 場次選單 -->
+                                            <div class="form-group">
+                                                <label for="showtime">選擇場次：</label>
+                                                <select id="showtime" name="showtime">
+                                                    <option value="">請先選擇分店</option>
+                                                </select>
+                                            </div>
+                                            
+                                            
+                                            <!-- 場次選單 end -->
+                                        </div>
+                                        
+                                        <div class="form-group tm-text-right">
+                                            <button id="submit-button-1" type="button" class="tm-btn">Send</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 快速訂票 第一頁 end -->
+                    <!--快速訂票 第二頁 座位-->
+                    
+                    <div id="contact2" class="tm-section, hidden">
+                        <div class="tm-gallery-container">
+                            <div class="tm-section-col" style="padding: 0%;">
+                                <head>
+                                    <meta charset="UTF-8">
+                                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                    <title>動態座位表</title>
+                                </head>
+                                <!--座位位置圖-->
+                                
+                                    <div class="tm-section-left">
+                                        <div id="seat-container" class="seat-container"></div>
+                                    </div>
+                                    <!-- 右邊的輸入框 -->
+                                    <div class="tm-section-right">
+                                        <!-- 並排輸入框 -->
+                                        <div class="form-group ,tm-mb-200" style="width: 60%;" style="max-width: 800px; margin-left: auto; margin-right: auto;">
+                                            <div class="form-group">
+                                                <label style="width:120%;" for="branch">選擇座位：</label>
+                                                <input type="text" id="seat" class="form-control" placeholder="seat"
+                                                readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label style="width:120%;" for="branch">輸入電話：</label>
+                                                <input
+                                                type="text"
+                                                id="phonenum"
+                                                class="form-control"
+                                                placeholder="輸入電話號碼(9位數 不包含開頭0)"
+                                                maxlength="9"
+                                                oninput="checkPhoneNumber(this)"
+                                            >
+                                            </div>
+                                            <div class="form-group">
+                                                <label style="width:120%;" for="branch">輸入姓名：</label>
+                                                <input
+                                                    type="text"
+                                                    id="name"
+                                                    class="form-control"
+                                                >
+                                            </div>                                            
+                                            
+
+                                        </div>
+
+                                        <!-- 提交按鈕 -->
+                                        <button class="tm-btn" id="submit-button-2">Send</button>
+                                    </div>
+                                
+                            </div>
+                        </div>
+                        <br><br>
+                    </div>
+                    <!--快速訂票 第二頁 座位 end-->
+                <!-- 快速訂票code結束 -->
+                
+            </div>
+        </div>
+        <!-- 快速訂票 end-->
+
+        <!-- 查詢訂票 start-->
+        <div id="search" class="tm-content tm-content-small-top">
+            <div class="tm-gallery-container" id="all_movie">
+                <h2 class="tm-text-primary tm-text-center tm-gallery-header">
+                <h3 style="font-size: 70px;">查詢訂票</h3>
+                <!-- code放這邊 -->
+                <div id="contact" class="tm-section">
+                    <div class="tm-gallery-container">
+                        <div class="tm-section-col" style="padding: 0%;">
+                            <form action="{% url 'search_order' %}" method="get"><br><br><br>
+                                <input type="text" name="query" placeholder="輸入您的電話號碼..." class="movie-search-bar" id="movieOrder" style="width: 400px;">
+                                <button type="submit" class="glow-on-hover"style="width: 400px;">查詢</button><br><br><br>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- 快速訂票code結束 -->
+            </div>
+        </div>
+        <!-- 查詢訂票 end-->
+        {% endblock %}
+
+        {% block js %}
+        <script>
+         function redirectToHome() {
+            // 導航到首頁
+            window.location.href = '/';
+
+            // 強制刷新頁面並滾動到頂部
+            window.onload = function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+        }
+
+        </script>
+        <script src="{% static 'js/index_order.js' %}"></script>
+        <script src="{% static 'js/seat.js' %}"></script>
+        
+    {% endblock %}

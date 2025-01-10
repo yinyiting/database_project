@@ -1,0 +1,279 @@
+html {
+    scroll-behavior: smooth;
+}
+.movie-search-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.movie-search-bar {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.movie-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.movie-item {
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    background-color: #f8f8f8;
+}
+
+.search-container {
+    display: flex; /* 讓搜尋框和按鈕並排 */
+    justify-content: center; /* 置中 */
+    align-items: center;
+    gap: 10px; /* 搜尋框與按鈕之間的間距 */
+}
+
+.movie-search-bar {
+    width: 70%; /* 搜尋框佔據 70% 寬度 */
+    max-width: 500px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #99CC99; /* 修改為與標題一致的綠色 */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #99CC99; /* 滑鼠懸停時稍微加深顏色 */
+}
+
+
+.tm-section {
+    background-color: #333;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    max-width: 900px;
+    margin: 20px auto;
+    align-items: center;
+    
+}
+
+.tm-section img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label {
+    font-size: 16px;
+    color: #ccc;
+}
+
+input[type="text"],
+input[type="date"],
+select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #222;
+    color: #fff;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+select:focus {
+    outline: none;
+    border-color: #4caf50;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+.hidden {
+    display: none;
+}
+/*.seat-container {
+    display: grid;
+    grid-template-columns: repeat(5, 50px);
+    gap: 10px;
+    background-color: #fff;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}*/
+
+.seat {
+    width: 50px;
+    height: 50px;
+    background-color: #4caf50;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.seat.selected {
+    background-color: #f39c12; /* 選中座位顏色 */
+}
+
+
+.seat.booked {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.seat:hover:not(.booked) {
+    background-color: #45a049;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+/*.tm-section-left {
+   
+    max-width: 80%; 
+}*/
+
+.tm-section-left img {
+    width: 80%; /* 圖片佔滿父容器 */
+    height: auto; /* 等比例縮放 */
+    border-radius: 8px; /* 圓角與整體一致 */
+    padding-right: 30px;
+}
+
+/* 右側內容（表單區域） */
+.tm-section-right {
+    flex: auto; /* 右侧占据一半空间 */
+    display: flex; /* 使用 Flexbox */
+    flex-direction: column; /* 内容垂直排列 */
+    gap: 15px; /* 内部元素的间距 */
+    
+}
+.tm-section-left {
+    flex: auto; /* 左侧占据一半空间 */
+    display: flex; /* 使用 Flexbox */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    max-width: 60%; /* 限制最大宽度为 50% */
+}
+
+#seat-container {
+    display: grid; /* 保持座位的网格布局 */
+    grid-template-columns: repeat(5, 50px); /* 每行 5 个座位 */
+    gap: 10px; /* 座位间距 */
+    padding: 20px; /* 内边距 */
+    background-color: #222; /* 背景色 */
+    border-radius: 8px; /* 圆角 */
+    border: 1px solid #444; /* 可选边框 */
+    margin-right: 80px;
+}
+
+
+/*add button style*/
+.glow-on-hover {
+    width: 220px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #164836;
+    background: #50764a;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ca7c7c, #c2b893, #97d362, #11ba6e, #00ffd5, #5160ac, #8b61b8, #99668e, #ca7c7c);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glow-on-hover:active {
+    color: #38734d
+}
+
+.glow-on-hover:active:after {
+    background: transparent;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #8caa91;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
